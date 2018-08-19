@@ -18,3 +18,10 @@ const food = {
     boat: 30
   }
 };
+
+select jobID from tblJob with(nolock)
+inner join (select item from udf_List2Table(ABC123, , )) f on tblJob.jobID = f.item
+where (enabled = convert(varchar, @enabledFG) or enabled =  convert(varchar, @disabledFG)
+and (name like @textToMatch  or description like @textToMatch )
+and corp_id = convert(varchar, @corpID)
+

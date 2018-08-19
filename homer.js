@@ -327,12 +327,12 @@ function gameOver() {}
 
 function levelUp() {}
 
-function setHomer(food) {
+function setHomer(lvl) {
   alert(
     `Level ${lvl}\nHomer has ${lvl *
       100} points\nDrop that down to zero to advance to the next level.`
   );
-  return function() {};
+  return lvl * 100;
 }
 
 function feedHomer(food) {}

@@ -293,46 +293,33 @@ let head10 = String.fromCharCode(32,32,32,124,32,32,32,32,32,46,45,39,32,32,92);
 let head11 = String.fromCharCode(32,32,32,124,32,32,46,45,39,32,32,32,32,32,41);
 let head12 = String.fromCharCode(32,32,32,124,32,40,32,32,95,47,46,46,45,46,39);
 let head13 = String.fromCharCode(32,32,32,124,32,32,96,46,95,95,95,46,39);
-let head14 = String.fromCharCode(32,32,32,47,32,32,32,32,40);
-let headHomer = [head1,head2,head3,head4,head5,head6,head7,head8,head9,head10,head11,head12,head13,head14]
+let head14 = String.fromCharCode(32,32,95,47,32,32,32,32,40);
+let head15 = String.fromCharCode(32,47,32,32,32,32,32,32,92,92); 
+
+let homersHead = [head1,head2,head3,head4,head5,head6,head7,head8,head9,head10,head11,head12,head13,head14,head15]
 console.log("head")
 
-function moveHomer(n){
-    for(let i = 0; i < headHomer.length; i++){
+// This function moves homer a cross the screen.
+function moveHomer(n){//n is the pause setTimeout in milliseconds between each loop
+    for(let i = 0; i < homersHead.length; i++){
       (function(i){
           setTimeout(function(){
-            str = str.concat(space);
-            
-            headHomer.forEach(e => {
+            str = str.concat(space); //build string to add to Homer
+            console.clear(); 
+            homersHead.forEach(ele => { //loop over homersHead 
               row = ""
-              row = row.concat(str,e);
+              row = row.concat(str,ele);
               console.log(row)
+              
             });
             
           },i * n)
       })(i)
+      
     }
 }
-moveHomer(200);
+moveHomer(125);
 
-
-
-
-// ___ String.fromCharCode(32,32,32,32,95,95,95)..
-// //_\\_ String.fromCharCode(32,32,32,47,47,95,92,92,95)..
-// ."\\    ". String.fromCharCode(32,46,34,92,92,32,32,32,32,34,46)...
-// /          \ String.fromCharCode(47,32,32,32,32,32,32,32,32,32,32,92)...
-// |           \_String.fromCharCode(124,32,32,32,32,32,32,32,32,32,32,32,92,95)..
-// |       ,--.-.)String.fromCharCode(124,32,32,32,32,32,32,32,44,45,45,46,45,46,41)..
-// \     /  o \o\String.fromCharCode(92,32,32,32,32,32,47,32,32,111,32,92,111,92)..
-// /\/\  \    /_/String.fromCharCode(32,47,92,47,92,32,32,92,32,32,32,32,47,95,47)..
-// (_.   `--'__)String.fromCharCode(32,32,40,95,46,32,32,32,96,45,45,39,95,95,41)..
-// |     .-'  \String.fromCharCode(32,32,32,124,32,32,32,32,32,46,45,39,32,32,92)..
-// |  .-'.     )String.fromCharCode(32,32,32,124,32,32,46,45,39,32,32,32,32,32,41)..
-// | (  _/--.-'String.fromCharCode(32,32,32,124,32,40,32,32,95,47,46,46,45,46,39)..
-// |  `.___.'String.fromCharCode(32,32,32,124,32,32,96,46,95,95,95,46,39)..
-// |    (String.fromCharCode(32,32,32,124,32,32,32,32,40)
- // console.log(headHomer);
 
 // function questionAnswer(question){
 //   console.log(question);

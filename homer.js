@@ -1,25 +1,3 @@
-const food = {
-  1: {
-    // add level one foods
-    donut: 1,
-    guitar: 2,
-    cello: 5
-  },
-  2: {
-    beer: 10
-  },
-  3: {
-    // add level three foods
-
-    car: 15
-  },
-  4: {
-    // add level four foods
-    marge: 60,
-    boat: 30
-  }
-};
-
 // SODA
 let straw = String.fromCharCode(32, '&#160', 32, '&#160', 32, 47, 32);
 let top = String.fromCharCode(46, 45, 47, 45, 46);
@@ -274,3 +252,56 @@ let beer4 = String.fromCharCode(
 let beer = [beer1, beer2, beer3, beer4];
 console.log('Beer');
 beer.forEach(e => console.log(e));
+
+(function start() {
+  let loop = 0;
+  const levels = [1, 2, 3, 4, 5, 6];
+  const food = {
+    1: {
+      donut: 1,
+      guitar: 2,
+      cello: 5
+    },
+    2: {
+      beer: 10
+    },
+    3: {
+      car: 15
+    },
+    4: {
+      marge: 60,
+      boat: 30
+    }
+  };
+
+  while (loop < levels.length) {
+    for (const key in food) {
+      if (object.hasOwnProperty(key)) {
+        const element = object[key];
+        prompt(`Feed Homer ${key}`);
+      }
+    }
+    alert('welcome');
+
+    function feedHomer(food) {}
+
+    // if (homer <= 0) {
+    //   loop++;
+    // }
+    loop++;
+  }
+})();
+
+function gameOver() {}
+
+function levelUp() {}
+
+function setHomer() {}
+
+function initGame() {}
+
+function setPlayerName() {
+  let playerName = prompt('What is your name?');
+  alert(`Hello ${playerName}!`);
+  return playerName;
+}

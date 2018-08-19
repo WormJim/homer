@@ -253,55 +253,94 @@ let beer = [beer1, beer2, beer3, beer4];
 console.log('Beer');
 beer.forEach(e => console.log(e));
 
-(function start() {
-  let loop = 0;
-  const levels = [1, 2, 3, 4, 5, 6];
-  const food = {
-    1: {
-      donut: 1,
-      guitar: 2,
-      cello: 5
-    },
-    2: {
-      beer: 10
-    },
-    3: {
-      car: 15
-    },
-    4: {
-      marge: 60,
-      boat: 30
-    }
-  };
-
-  while (loop < levels.length) {
-    for (const key in food) {
-      if (object.hasOwnProperty(key)) {
-        const element = object[key];
-        prompt(`Feed Homer ${key}`);
-      }
-    }
-    alert('welcome');
-
-    function feedHomer(food) {}
-
-    // if (homer <= 0) {
-    //   loop++;
-    // }
-    loop++;
+const foodLevels = [
+  {
+    donut: 10,
+    soda: 10,
+    fries: 15,
+    burger: 25,
+    cowboy_burger: 35,
+    pizza: 20,
+    beer: 15,
+    ice_cream: 15
+  },
+  {
+    guitar: 25,
+    cello: 30,
+    piano: 40,
+    computer: 25,
+    desk: 35,
+    drums: 40,
+    chair: 25,
+    tree: 40
+  },
+  {
+    car: 40,
+    boat: 60,
+    plane: 70,
+    truck: 60,
+    motorcycle: 30,
+    train: 70,
+    plutonium: 90,
+    bees: 60
+  },
+  {
+    marge: 80,
+    bart: 70,
+    lisa: 55,
+    maggie: 100,
+    krusty_the_clown: 80,
+    apu: 70,
+    ned_flanders: 90,
+    mr_burns: 60,
+    santas_little_helper: 80
   }
-})();
+];
+
+function intro() {
+  const string =
+    'Welcome to Happy, Happy Homer.\n' +
+    "A fun game Homer from the Simpsons can't stop eating\n" +
+    'Feed him everything you can to satisfy his craving.';
+  alert(string);
+}
+
+function setPlayer() {
+  alert("Let's get started");
+  let player = prompt('What is your name?');
+  alert(`Hello ${player}!`);
+  return player;
+}
+
+function gameRules(player) {
+  alert(`${player}, let's go over the game play`);
+  let gamePlayString =
+    'The objective is to feed Homer a variety of items.\n' +
+    "If he doesn't explode, you advance to the next level.\n" +
+    'Beware though, Homer might randomly explode\n' +
+    "Try not to feed him too fast or you'll be coverd in everything he ate.";
+
+  alert(gamePlayString);
+}
 
 function gameOver() {}
 
 function levelUp() {}
 
-function setHomer() {}
-
-function initGame() {}
-
-function setPlayerName() {
-  let playerName = prompt('What is your name?');
-  alert(`Hello ${playerName}!`);
-  return playerName;
+function setHomer(food) {
+  alert(
+    `Level ${lvl}\nHomer has ${lvl *
+      100} points\nDrop that down to zero to advance to the next level.`
+  );
+  return function() {};
 }
+
+function feedHomer(food) {}
+
+(function initGame() {
+  intro();
+  let player = setPlayer();
+  gameRules(player);
+  let homer = setHomer(1);
+  feedHomer(food);
+})();

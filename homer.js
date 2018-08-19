@@ -10,7 +10,7 @@ const food = {
   },
   3: {
     // add level three foods
-    car: 15
+    car: 15``
   },
   4: {
     // add level four foods

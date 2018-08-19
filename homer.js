@@ -10,6 +10,7 @@ const food = {
   },
   3: {
     // add level three foods
+
     car: 15
   },
   4: {
@@ -18,7 +19,6 @@ const food = {
     boat: 30
   }
 };
-
 
 SODA
 let straw = String.fromCharCode(32,'&#160',32,'&#160',32,47,32);
@@ -67,5 +67,3 @@ let beer4 = String.fromCharCode(32,'&#160',32,'&#160',126,126,126,126,126);
 let beer = [beer1,beer2,beer3,beer4];
 console.log("Beer")
 beer.forEach((e)=>console.log(e));
-
-

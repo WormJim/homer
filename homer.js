@@ -276,7 +276,7 @@
 // beer.forEach(e => console.log(e));
 // 
 
-let space = String.fromCharCode(46,46);
+let space = String.fromCharCode(32,32);
 let row   = "";
 let str   = "";
 

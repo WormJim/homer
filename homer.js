@@ -1,3 +1,9 @@
+const readline = require('readline');
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 // // SODA
 // let straw = String.fromCharCode(32, '&#160', 32, '&#160', 32, 47, 32);
 // let top = String.fromCharCode(46, 45, 47, 45, 46);
@@ -258,7 +264,7 @@ const foodLevels = [
     donut: 10,
     soda: 10,
     fries: 15,
-    burger: 25,
+    burger: 75,
     cowboy_burger: 35,
     pizza: 20,
     beer: 15,
@@ -328,19 +334,36 @@ function gameOver() {}
 function levelUp() {}
 
 function setHomer(lvl) {
-  alert(
+  // alert(
+  //   `Level ${lvl}\nHomer has ${lvl *
+  //     100} points\nDrop that down to zero to advance to the next level.`
+  // );
+  console.log(
     `Level ${lvl}\nHomer has ${lvl *
       100} points\nDrop that down to zero to advance to the next level.`
   );
   return lvl * 100;
 }
 
-function feedHomer(food) {}
+function feedHomer(food) {
+  let level = 1;
+  let homerBelly = setHomer(level);
+  let levelFood = Object.keys(foodLevels[level - 1]);
+
+  while (homerBelly > 0) {
+    let chosen;
+    rl.question(`Feed Homer:\n ${levelFood}`, answer => {
+      chosen = answer;
+    });
+    homerBelly -= foodLevels[level - 1][chosen];
+    console.log('Belly size: ', homerBelly);
+  }
+}
 
 (function initGame() {
-  intro();
-  let player = setPlayer();
-  gameRules(player);
-  let homer = setHomer(1);
-  feedHomer(food);
+  // intro();
+  // let player = setPlayer();
+  // gameRules(player);
+  // let homer = setHomer(1);
+  feedHomer(foodLevels);
 })();

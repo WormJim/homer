@@ -6,49 +6,207 @@ function readLineFunc() {
   rl = readline.createInterface(process.stdin, process.stdout);
 }
 
-let space = String.fromCharCode(32,32);
-let row   = "";
-let str   = "";
+let space = String.fromCharCode(32, 32);
+let row = '';
+let str = '';
 
-let head1  = String.fromCharCode(32,32,32,32,95,95,95);
-let head2  = String.fromCharCode(32,32,32,47,47,95,92,92,95);
-let head3  = String.fromCharCode(32,46,34,92,92,32,32,32,32,34,46);
-let head4  = String.fromCharCode(47,32,32,32,32,32,32,32,32,32,32,92);
-let head5  = String.fromCharCode(124,32,32,32,32,32,32,32,32,32,32,32,92,95);
-let head6  = String.fromCharCode(124,32,32,32,32,32,32,32,44,45,45,46,45,46,41);
-let head7  = String.fromCharCode(32,92,32,32,32,32,32,47,32,32,111,32,92,111,92);
-let head8  = String.fromCharCode(32,47,92,47,92,32,32,92,32,32,32,32,47,95,47);
-let head9  = String.fromCharCode(32,32,40,95,46,32,32,32,96,45,45,39,95,95,41);
-let head10 = String.fromCharCode(32,32,32,124,32,32,32,32,32,46,45,39,32,32,92);
-let head11 = String.fromCharCode(32,32,32,124,32,32,46,45,39,32,32,32,32,32,41);
-let head12 = String.fromCharCode(32,32,32,124,32,40,32,32,95,47,46,46,45,46,39);
-let head13 = String.fromCharCode(32,32,32,124,32,32,96,46,95,95,95,46,39);
-let head14 = String.fromCharCode(32,32,95,47,32,32,32,32,40);
-let head15 = String.fromCharCode(32,47,32,32,32,32,32,32,92,92); 
+let head1 = String.fromCharCode(32, 32, 32, 32, 95, 95, 95);
+let head2 = String.fromCharCode(32, 32, 32, 47, 47, 95, 92, 92, 95);
+let head3 = String.fromCharCode(32, 46, 34, 92, 92, 32, 32, 32, 32, 34, 46);
+let head4 = String.fromCharCode(47, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 92);
+let head5 = String.fromCharCode(
+  124,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  92,
+  95
+);
+let head6 = String.fromCharCode(
+  124,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  32,
+  44,
+  45,
+  45,
+  46,
+  45,
+  46,
+  41
+);
+let head7 = String.fromCharCode(
+  32,
+  92,
+  32,
+  32,
+  32,
+  32,
+  32,
+  47,
+  32,
+  32,
+  111,
+  32,
+  92,
+  111,
+  92
+);
+let head8 = String.fromCharCode(
+  32,
+  47,
+  92,
+  47,
+  92,
+  32,
+  32,
+  92,
+  32,
+  32,
+  32,
+  32,
+  47,
+  95,
+  47
+);
+let head9 = String.fromCharCode(
+  32,
+  32,
+  40,
+  95,
+  46,
+  32,
+  32,
+  32,
+  96,
+  45,
+  45,
+  39,
+  95,
+  95,
+  41
+);
+let head10 = String.fromCharCode(
+  32,
+  32,
+  32,
+  124,
+  32,
+  32,
+  32,
+  32,
+  32,
+  46,
+  45,
+  39,
+  32,
+  32,
+  92
+);
+let head11 = String.fromCharCode(
+  32,
+  32,
+  32,
+  124,
+  32,
+  32,
+  46,
+  45,
+  39,
+  32,
+  32,
+  32,
+  32,
+  32,
+  41
+);
+let head12 = String.fromCharCode(
+  32,
+  32,
+  32,
+  124,
+  32,
+  40,
+  32,
+  32,
+  95,
+  47,
+  46,
+  46,
+  45,
+  46,
+  39
+);
+let head13 = String.fromCharCode(
+  32,
+  32,
+  32,
+  124,
+  32,
+  32,
+  96,
+  46,
+  95,
+  95,
+  95,
+  46,
+  39
+);
+let head14 = String.fromCharCode(32, 32, 95, 47, 32, 32, 32, 32, 40);
+let head15 = String.fromCharCode(32, 47, 32, 32, 32, 32, 32, 32, 92, 92);
 
-let homersHead = [head1,head2,head3,head4,head5,head6,head7,head8,head9,head10,head11,head12,head13,head14,head15]
+let homersHead = [
+  head1,
+  head2,
+  head3,
+  head4,
+  head5,
+  head6,
+  head7,
+  head8,
+  head9,
+  head10,
+  head11,
+  head12,
+  head13,
+  head14,
+  head15
+];
 // console.log("head")
 
 // This function moves homer a cross the screen.
-function moveHomer(n,cb){//n is the pause setTimeout in milliseconds between each loop
-    for(let i = 0; i < homersHead.length; i++){
-      (function(i){
-          setTimeout(function(){
-            str = str.concat(space); //build string to add to Homer
-            console.clear(); 
-            homersHead.forEach(ele => { //loop over homersHead 
-              row = ""
-              row = row.concat(str,ele);
-              console.log(row)
-            });
-            if (i === homersHead.length-1){
-              console.log("Ready to start the our game!!")
-              setTimeout(()=>cb(),(n*10));
-            }
-          },i * n)
-        })(i) 
-    }
-
+function moveHomer(n, cb) {
+  //n is the pause setTimeout in milliseconds between each loop
+  for (let i = 0; i < homersHead.length; i++) {
+    (function(i) {
+      setTimeout(function() {
+        str = str.concat(space); //build string to add to Homer
+        console.clear();
+        homersHead.forEach(ele => {
+          //loop over homersHead
+          row = '';
+          row = row.concat(str, ele);
+          console.log(row);
+        });
+        if (i === homersHead.length - 1) {
+          console.log('Ready to start the our game!!');
+          setTimeout(() => cb(), n * 10);
+        }
+      }, i * n);
+    })(i);
+  }
 }
 
 // // SODA
@@ -305,7 +463,7 @@ function moveHomer(n,cb){//n is the pause setTimeout in milliseconds between eac
 // let beer = [beer1, beer2, beer3, beer4];
 // console.log('Beer');
 // beer.forEach(e => console.log(e));
-let consoleBrowser = "" //flag to know where we are operating, 'B' for Browser, 'T' for terminal
+let consoleBrowser = ''; //flag to know where we are operating, 'B' for Browser, 'T' for terminal
 
 const foodLevels = [
   {
@@ -404,8 +562,6 @@ function feedHomerTerminal(food, lvl) {
 // ########################
 
 function intro() {
-
-
   const string =
     'Welcome to Happy, Happy Homer.\n' +
     "A fun game Homer from the Simpsons can't stop eating\n" +
@@ -464,25 +620,16 @@ function feedHomer(food, lvl) {
 
 function initGame() {
   if (typeof window === 'undefined') {
-    consoleBrowser = "T";
+    consoleBrowser = 'T';
     readLineFunc();
     feedHomerTerminal(foodLevels, 1);
   } else {
-    consoleBrowser = "B";
+    consoleBrowser = 'B';
     // intro();
     let player = setPlayer();
     gameRules(player);
     feedHomer(foodLevels, 1);
   }
 }
-function myCB(){
-  console.log("done")
-}
 
-moveHomer(125,initGame);
-
-
-
-
-
-
+moveHomer(125, initGame);

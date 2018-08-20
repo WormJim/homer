@@ -1,55 +1,10 @@
-const readline = require('readline');
-const rl = readline.createInterface(process.stdin, process.stdout);
+let readLine;
+let rl;
 
-const player = {
-  name: ''
-};
-
-const levels = [1, 2, 3, 4];
-
-const foodLevels = [
-  {
-    donut: 10,
-    soda: 10,
-    fries: 15,
-    burger: 25,
-    cowboy_burger: 35,
-    pizza: 20,
-    beer: 15,
-    ice_cream: 15
-  },
-  {
-    guitar: 25,
-    cello: 30,
-    piano: 40,
-    computer: 25,
-    desk: 35,
-    drums: 40,
-    chair: 25,
-    tree: 40
-  },
-  {
-    car: 40,
-    boat: 60,
-    plane: 70,
-    truck: 60,
-    motorcycle: 30,
-    train: 70,
-    plutonium: 90,
-    bees: 60
-  },
-  {
-    marge: 80,
-    bart: 70,
-    lisa: 55,
-    maggie: 100,
-    krusty_the_clown: 80,
-    apu: 70,
-    ned_flanders: 90,
-    mr_burns: 60,
-    santas_little_helper: 80
-  }
-];
+function readLineFunc() {
+  readLine = require('readline');
+  rl = readLine.createInterface(process.stdin, process.stdout);
+}
 
 // // SODA
 // let straw = String.fromCharCode(32, '&#160', 32, '&#160', 32, 47, 32);
@@ -306,12 +261,108 @@ const foodLevels = [
 // console.log('Beer');
 // beer.forEach(e => console.log(e));
 
-function setHomer(lvl) {
-  process.stdout.write(
-    `Level ${lvl}\nHomer has ${lvl *
-      100} points\nDrop that down to zero to advance to the next level.`
-  );
+const foodLevels = [
+  {
+    donut: 75,
+    soda: 10,
+    fries: 15,
+    burger: 75,
+    cowboy_burger: 35,
+    pizza: 20,
+    beer: 15,
+    ice_cream: 15
+  },
+  {
+    guitar: 25,
+    cello: 30,
+    piano: 40,
+    computer: 25,
+    desk: 35,
+    drums: 40,
+    chair: 25,
+    tree: 40
+  },
+  {
+    car: 40,
+    boat: 60,
+    plane: 70,
+    truck: 60,
+    motorcycle: 30,
+    train: 70,
+    plutonium: 90,
+    bees: 60
+  },
+  {
+    marge: 80,
+    bart: 70,
+    lisa: 55,
+    maggie: 100,
+    krusty_the_clown: 80,
+    apu: 70,
+    ned_flanders: 90,
+    mr_burns: 60,
+    santas_little_helper: 80
+  }
+];
+
+function gameOver() {}
+
+function levelUpTerminal() {
+  console.log('In Level Up');
+}
+
+function setHomerTerminal(lvl) {
   return lvl * 100;
+}
+
+function feedHomerTerminal(food, lvl) {
+  let bellySize = setHomerTerminal(lvl);
+  let levelFood = Object.keys(food[lvl - 1]);
+
+  // while (homerBelly > 0) {
+  rl.question(`Feed Homer:\n ${levelFood}? > `, answer => {
+    bellySize -= food[lvl - 1][answer];
+    process.stdout.write(`Belly size: ${bellySize}`);
+
+    // if (bellySize > 0) {
+    //   rl.setPrompt(
+    //     `Homer is almost full, choose something else:\n ${levelFood} > `
+    //   );
+    //   rl.prompt();
+    // }
+
+    rl.on('line', answer => {
+      if (bellySize > 0) {
+        rl.setPrompt(
+          `Homer is almost full, choose something else:\n ${levelFood} > `
+        );
+        rl.prompt();
+        bellySize -= foodLevels[lvl - 1][answer];
+        process.stdout.write(`New Belly Size: ${bellySize}`);
+      } else {
+        rl.close();
+      }
+
+      // if (bellySize <= 0) {
+      //   rl.close();
+      //   levelUp();
+      // }
+    });
+
+    // feedHomer(food, lvl + 1);
+  });
+}
+
+// ########################
+// ##BROWESER CODE BELOW ##
+// ########################
+
+function intro() {
+  const string =
+    'Welcome to Happy, Happy Homer.\n' +
+    "A fun game Homer from the Simpsons can't stop eating\n" +
+    'Feed him everything you can to satisfy his craving.';
+  alert(string);
 }
 
 function feedHomer(food) {}
@@ -327,56 +378,45 @@ function gameRules(player) {
   // alert(gamePlayString);
 }
 
-function gameOver() {}
-
-function levelUp() {}
-
-function feedHomer(food) {}
-
-function intro() {
-  const string =
-    'Welcome to Happy, Happy Homer.\n' +
-    "A fun game Homer from the Simpsons can't stop eating.\n" +
-    'Feed him everything you can to satisfy his craving.\n' +
-    "Let's get started. (return to continue)\n";
-  process.stdout.write(string);
-}
-
-function setPlayer() {
-  rl.question('\nWhat would you like us to call you? > ', answer => {
-    player.name = answer;
-    // rl.setPrompt(`Nice to have you here ${answer} (return to continue)`);
-    // rl.prompt();
-
-    // rl.on('line', () => {
-    //   rl.setPrompt(
-    //     `What would you like to feed Homer ${Object.keys(foodLevels[0])}`
-    //   );
-    //   rl.prompt();
-    // });
-  });
-
-  // let player = process.stdout.write('What is your name?  >  ');
-  // process.stdout.write(`Hello ${player}!\n`);
-  // return player;
-}
-
-function another() {
-  rl.question(
-    `What would you like to feed Homer?: ${Object.keys(foodLevels[0])}`,
-    answer => {
-      console.log(answer);
-    }
+function setHomer(lvl) {
+  alert(
+    `Level ${lvl}\nHomer has ${lvl *
+      100} points\nDrop that down to zero to advance to the next level.`
   );
+  let level = lvl * 100;
+  return level;
 }
+
+function feedHomer(food, lvl) {
+  let homerBelly = setHomer(lvl);
+  let levelFood = Object.keys(foodLevels[lvl - 1]);
+
+  while (homerBelly > 0) {
+    let chosen = prompt(
+      `Feed homer with the choice of food:\n ` + levelFood.join('\n')
+    );
+
+    if (homerBelly <= 0) {
+      alert('You leveled up!');
+    } else if (homerBelly > 0) {
+      homerBelly -= foodLevels[lvl - 1][chosen];
+      alert('Current remaining space is: ' + homerBelly);
+    }
+  }
+
+  return feedHomer(foodLevels, lvl + 1);
+}
+
+// feedHomer(foodLevels, 1);
 
 (function initGame() {
-  // let homer = setHomer(1);
-  intro();
-  setPlayer();
-  another();
-
-  // console.log('Out');
-  // gameRules(player);
-  // feedHomer(food);
+  if (typeof window === 'undefined') {
+    readLineFunc();
+    feedHomerTerminal(foodLevels, 1);
+  } else {
+    intro();
+    let player = setPlayer();
+    gameRules(player);
+    feedHomer(foodLevels, 1);
+  }
 })();

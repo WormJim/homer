@@ -557,8 +557,8 @@ function homerMustEat(answer, food, bellySize, levelFood) {
     rl.close();
   }
 
-  console.log(food);
-  console.log(food.hasOwnProperty(answer));
+  // console.log(food);
+  // console.log(food.hasOwnProperty(answer));
 
   if (!levelFood.hasOwnProperty(answer)) {
     rl.setPrompt(`\nImproper argument, please choose again:\n${levelFood} > `);
@@ -579,8 +579,8 @@ function homerMustEat(answer, food, bellySize, levelFood) {
   }
 }
 
-function feedHomerTerminal(food, lvl) {
-  let bellySize = setHomerTerminal(lvl);
+function feedHomerTerminal(food, lvl, homer) {
+  let bellySize = homer();
   let levelFood = Object.keys(food[lvl - 1]);
 
   rl.question(`\nFeed Homer:\n ${levelFood}? > `, answer => {
@@ -659,7 +659,6 @@ function feedHomer(food, lvl) {
   return feedHomer(foodLevels, lvl + 1);
 }
 
-
 // ***** dual version functions ***** //
 function initGame() {
   if (typeof window === 'undefined') {
@@ -668,7 +667,7 @@ function initGame() {
     readLineFunc();
     let homer = setHomerTerminal();
     // feedHomerTerminal(foodLevels, 1);
-    feedHomerTerminal(homer());
+    feedHomerTerminal(foodLevels, 1, homer);
   } else {
     consoleBrowser = 'B';
     // intro();

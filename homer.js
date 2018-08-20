@@ -332,8 +332,12 @@ function levelUpTerminal() {
   console.log('In Level Up');
 }
 
+function setHomerTerminal(lvl) {
+  return lvl * 100;
+}
+
 function feedHomerTerminal(food, lvl) {
-  let bellySize = setHomer(lvl);
+  let bellySize = setHomerTerminal(lvl);
   let levelFood = Object.keys(food[lvl - 1]);
 
   // while (homerBelly > 0) {

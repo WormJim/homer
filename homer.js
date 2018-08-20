@@ -1,3 +1,56 @@
+const readline = require('readline');
+const rl = readline.createInterface(process.stdin, process.stdout);
+
+const player = {
+  name: ''
+};
+
+const levels = [1, 2, 3, 4];
+
+const foodLevels = [
+  {
+    donut: 10,
+    soda: 10,
+    fries: 15,
+    burger: 25,
+    cowboy_burger: 35,
+    pizza: 20,
+    beer: 15,
+    ice_cream: 15
+  },
+  {
+    guitar: 25,
+    cello: 30,
+    piano: 40,
+    computer: 25,
+    desk: 35,
+    drums: 40,
+    chair: 25,
+    tree: 40
+  },
+  {
+    car: 40,
+    boat: 60,
+    plane: 70,
+    truck: 60,
+    motorcycle: 30,
+    train: 70,
+    plutonium: 90,
+    bees: 60
+  },
+  {
+    marge: 80,
+    bart: 70,
+    lisa: 55,
+    maggie: 100,
+    krusty_the_clown: 80,
+    apu: 70,
+    ned_flanders: 90,
+    mr_burns: 60,
+    santas_little_helper: 80
+  }
+];
+
 // // SODA
 // let straw = String.fromCharCode(32, '&#160', 32, '&#160', 32, 47, 32);
 // let top = String.fromCharCode(46, 45, 47, 45, 46);
@@ -253,64 +306,15 @@
 // console.log('Beer');
 // beer.forEach(e => console.log(e));
 
-const foodLevels = [
-  {
-    donut: 10,
-    soda: 10,
-    fries: 15,
-    burger: 25,
-    cowboy_burger: 35,
-    pizza: 20,
-    beer: 15,
-    ice_cream: 15
-  },
-  {
-    guitar: 25,
-    cello: 30,
-    piano: 40,
-    computer: 25,
-    desk: 35,
-    drums: 40,
-    chair: 25,
-    tree: 40
-  },
-  {
-    car: 40,
-    boat: 60,
-    plane: 70,
-    truck: 60,
-    motorcycle: 30,
-    train: 70,
-    plutonium: 90,
-    bees: 60
-  },
-  {
-    marge: 80,
-    bart: 70,
-    lisa: 55,
-    maggie: 100,
-    krusty_the_clown: 80,
-    apu: 70,
-    ned_flanders: 90,
-    mr_burns: 60,
-    santas_little_helper: 80
-  }
-];
-
-function intro() {
-  const string =
-    'Welcome to Happy, Happy Homer.\n' +
-    "A fun game Homer from the Simpsons can't stop eating\n" +
-    'Feed him everything you can to satisfy his craving.';
-  alert(string);
+function setHomer(lvl) {
+  process.stdout.write(
+    `Level ${lvl}\nHomer has ${lvl *
+      100} points\nDrop that down to zero to advance to the next level.`
+  );
+  return lvl * 100;
 }
 
-function setPlayer() {
-  alert("Let's get started");
-  let player = prompt('What is your name?');
-  alert(`Hello ${player}!`);
-  return player;
-}
+function feedHomer(food) {}
 
 function gameRules(player) {
   alert(`${player}, let's go over the game play`);
@@ -320,27 +324,49 @@ function gameRules(player) {
     'Beware though, Homer might randomly explode\n' +
     "Try not to feed him too fast or you'll be coverd in everything he ate.";
 
-  alert(gamePlayString);
+  // alert(gamePlayString);
 }
 
 function gameOver() {}
 
 function levelUp() {}
 
-function setHomer(lvl) {
-  alert(
-    `Level ${lvl}\nHomer has ${lvl *
-      100} points\nDrop that down to zero to advance to the next level.`
-  );
-  return lvl * 100;
-}
-
 function feedHomer(food) {}
 
+function intro() {
+  const string =
+    'Welcome to Happy, Happy Homer.\n' +
+    "A fun game Homer from the Simpsons can't stop eating.\n" +
+    'Feed him everything you can to satisfy his craving.\n' +
+    "Let's get started. (return to continue)\n";
+  process.stdout.write(string);
+}
+
+function setPlayer() {
+  rl.question('\nWhat would you like us to call you? > ', answer => {
+    player.name = answer;
+    // Can either have setPrompt or
+    rl.setPrompt(`Nice to have you here ${answer} (return to continue)`);
+    rl.prompt();
+    // return;
+    // rl.on('line', () => {
+    //   rl.setPrompt(`How Excited are you about this ${player.name}? > `);
+    //   rl.prompt();
+    // rl.close();
+    // });
+    // can have console.log()
+    // console.log(`Nice to have you here ${answer}`);
+  });
+  // let player = process.stdout.write('What is your name?  >  ');
+  // process.stdout.write(`Hello ${player}!\n`);
+  // return player;
+}
+
 (function initGame() {
-  intro();
-  let player = setPlayer();
-  gameRules(player);
   let homer = setHomer(1);
-  feedHomer(food);
+  intro();
+  setPlayer();
+  console.log('Out');
+  gameRules(player);
+  // feedHomer(food);
 })();

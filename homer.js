@@ -517,6 +517,13 @@ function introT() {
   console.log(string);
 }
 
+function setPlayer() {
+  alert("Let's get started");
+  let player = prompt('What is your name?');
+  alert(`Hello ${player}!`);
+  return player;
+}
+
 function gameRulesT(player) {
   console.log(`${player}, let's go over the game play`);
   let gamePlayString =

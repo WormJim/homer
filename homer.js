@@ -328,23 +328,11 @@ function gameRules(player) {
 
 function gameOver() {}
 
-function levelUp() {
+function levelUpTerminal() {
   console.log('In Level Up');
 }
 
-function setHomer(lvl) {
-  // alert(
-  //   `Level ${lvl}\nHomer has ${lvl *
-  //     100} points\nDrop that down to zero to advance to the next level.`
-  // );
-  // console.log(
-  //   `Level ${lvl}\nHomer has ${lvl *
-  //     100} points\nDrop that down to zero to advance to the next level.`
-  // );
-  return lvl * 100;
-}
-
-function feedHomer(food, lvl) {
+function feedHomerTerminal(food, lvl) {
   let bellySize = setHomer(lvl);
   let levelFood = Object.keys(food[lvl - 1]);
 
@@ -370,61 +358,42 @@ function feedHomer(food, lvl) {
 
     // feedHomer(food, lvl + 1);
   });
-  // }
-
-  // function setPlayer() {
-  //   rl.question('\nWhat would you like us to call you? > ', answer => {
-  //     player.name = answer;
-  //     // rl.setPrompt(`Nice to have you here ${answer} (return to continue)`);
-  //     // rl.prompt();
-
-  //     // rl.on('line', () => {
-  //     //   rl.setPrompt(
-  //     //     `What would you like to feed Homer ${Object.keys(foodLevels[0])}`
-  //     //   );
-  //     //   rl.prompt();
-  //     // });
-  //   });
-
-  //   // let player = process.stdout.write('What is your name?  >  ');
-  //   // process.stdout.write(`Hello ${player}!\n`);
-  //   // return player;
-  // }
 }
 
+function setHomer(lvl) {
+  alert(
+    `Level ${lvl}\nHomer has ${lvl *
+      100} points\nDrop that down to zero to advance to the next level.`
+  );
+  let level = lvl * 100;
+  return level;
+}
+
+function feedHomer(food, lvl) {
+  let homerBelly = setHomer(lvl);
+  let levelFood = Object.keys(foodLevels[lvl - 1]);
+
+  while (homerBelly > 0) {
+    let chosen = prompt(
+      `Feed homer with the choice of food:\n ` + levelFood.join('\n')
+    );
+
+    if (homerBelly <= 0) {
+      alert('You leveled up!');
+    } else if (homerBelly > 0) {
+      homerBelly -= foodLevels[lvl - 1][chosen];
+      alert('Current remaining space is: ' + homerBelly);
+    }
+  }
+
+  return feedHomer(foodLevels, lvl + 1);
+}
+
+// feedHomer(foodLevels, 1);
+
 (function initGame() {
-  // intro();
-  // let player = setPlayer();
-  // gameRules(player);
-  // let homer = setHomer(1);
+  intro();
+  let player = setPlayer();
+  gameRules(player);
   feedHomer(foodLevels, 1);
 })();
-
-// function setHomer(lvl) {
-//   alert(
-//     `Level ${lvl}\nHomer has ${lvl *
-//       100} points\nDrop that down to zero to advance to the next level.`
-//   );
-//   let level = lvl * 100;
-//   return level;
-// }
-
-// function feedHomer(food, lvl) {
-//   let homerBelly = setHomer(lvl);
-//   let levelFood = Object.keys(food[lvl - 1]);
-
-//   while (homerBelly > 0) {
-//     let chosen = prompt(
-//       `Feed homer with the choice of food:\n ` + levelFood.join('\n')
-//     );
-
-//     if (homerBelly <= 0) {
-//       alert('You leveled up!');
-//     } else if (homerBelly > 0) {
-//       homerBelly -= food[lvl - 1][chosen];
-//       alert('Current remaining space is: ' + homerBelly);
-//     }
-//   }
-
-//   return feedHomer(foodLevels, lvl + 1);
-// }

@@ -1,8 +1,5 @@
 const readline = require('readline');
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+const rl = readline.createInterface(process.stdin, process.stdout);
 
 // // SODA
 // let straw = String.fromCharCode(32, '&#160', 32, '&#160', 32, 47, 32);

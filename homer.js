@@ -613,7 +613,7 @@ function feedHomerTerminal(food, lvl) {
 function introB() {
   const string =
     'Welcome to Happy, Happy Homer.\n' +
-    "A fun game Homer from the Simpsons can't stop eating\n" +
+    "A fun game. Here, Homer from the Simpsons just can't stop eating!\n" +
     'Feed him everything you can to satisfy his craving.';
   alert(string);
 }

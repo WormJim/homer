@@ -200,8 +200,6 @@ function moveHomer(n, cb) {
   }
 }
 
-let consoleBrowser = ''; //flag to know where we are operating, 'B' for Browser, 'T' for terminal
-
 const foodLevels = [
   {
     donut: 75,
@@ -246,7 +244,7 @@ const foodLevels = [
   }
 ];
 
-function introB() {
+function intro() {
   const string =
     'Welcome to Happy, Happy Homer.\n' +
     "A fun game Homer from the Simpsons can't stop eating\n" +
@@ -254,7 +252,7 @@ function introB() {
   alert(string);
 }
 
-function gameRulesB(player) {
+function gameRules(player) {
   alert(`${player}, let's go over the game play`);
   let gamePlayString =
     'The objective is to feed Homer a variety of items.\n' +
@@ -265,7 +263,7 @@ function gameRulesB(player) {
   alert(gamePlayString);
 }
 
-function setHomerB(lvl) {
+function setHomer(lvl) {
   alert(
     `Level ${lvl}\nHomer has ${lvl *
       100} points\nDrop that down to zero to advance to the next level.`
@@ -274,7 +272,7 @@ function setHomerB(lvl) {
 }
 
 function feedHomer(food, lvl) {
-  let homerBelly = setHomerB(lvl);
+  let homerBelly = setHomer(lvl);
   let levelFood = Object.keys(foodLevels[lvl - 1]);
 
   while (homerBelly > 0) {
@@ -303,7 +301,7 @@ function initGame() {
   }
   // intro();
 
-  // gameRulesB(player);
+  // gameRules(player);
   // feedHomer(foodLevels, 1);
 }
 

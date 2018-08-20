@@ -509,6 +509,14 @@ const foodLevels = [
   }
 ];
 
+function introTerminal() {
+  const string =
+    '\nWelcome to Happy, Happy Homer.\n' +
+    "A fun game Homer from the Simpsons can't stop eating\n" +
+    'Feed him everything you can to satisfy his craving.\n';
+  process.stdout.write(string);
+}
+
 function gameOver() {}
 
 function levelUpTerminal(lvl) {
@@ -632,6 +640,7 @@ function feedHomer(food, lvl) {
 function initGame() {
   if (typeof window === 'undefined') {
     consoleBrowser = 'T';
+    introTerminal();
     readLineFunc();
     feedHomerTerminal(foodLevels, 1);
   } else {

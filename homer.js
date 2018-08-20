@@ -1,9 +1,9 @@
-let readLine;
+let readline;
 let rl;
 
 function readLineFunc() {
-  readLine = require('readline');
-  rl = readLine.createInterface(process.stdin, process.stdout);
+  readline = require('readline');
+  rl = readline.createInterface(process.stdin, process.stdout);
 }
 
 // // SODA

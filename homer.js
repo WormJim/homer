@@ -352,18 +352,41 @@ function feedHomer(food) {
 
   // while (homerBelly > 0) {
   rl.question(`Feed Homer:\n ${levelFood}? > `, answer => {
-    let chosen = answer.trim();
-    console.log('Chosen: ', chosen);
+    homerBelly -= foodLevels[level - 1][answer];
+    process.stdout.write(`Belly size: ${homerBelly}`);
 
-    homerBelly -= foodLevels[level - 1][chosen];
-    console.log('Belly size: ', homerBelly);
-    if (homerBelly <= 0) {
-      rl.close();
-      levelUp();
-    }
-    rl.setPrompt(`Homer is almost full, choose something else: ${levelFood}`);
-    rl.prompt();
+    rl.on('line', answer => {
+      rl.setPrompt(
+        `Homer is almost full, choose something else:\n ${levelFood} > `
+      );
+      rl.prompt();
+      homerBelly -= foodLevels[level - 1][answer];
+
+      if (homerBelly <= 0) {
+        rl.close();
+        levelUp();
+      }
+    });
   });
+  // }
+
+  // function setPlayer() {
+  //   rl.question('\nWhat would you like us to call you? > ', answer => {
+  //     player.name = answer;
+  //     // rl.setPrompt(`Nice to have you here ${answer} (return to continue)`);
+  //     // rl.prompt();
+
+  //     // rl.on('line', () => {
+  //     //   rl.setPrompt(
+  //     //     `What would you like to feed Homer ${Object.keys(foodLevels[0])}`
+  //     //   );
+  //     //   rl.prompt();
+  //     // });
+  //   });
+
+  //   // let player = process.stdout.write('What is your name?  >  ');
+  //   // process.stdout.write(`Hello ${player}!\n`);
+  //   // return player;
   // }
 }
 

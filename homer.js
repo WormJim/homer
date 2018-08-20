@@ -1,5 +1,10 @@
-const readline = require('readline');
-const rl = readline.createInterface(process.stdin, process.stdout);
+let readLine;
+let rl;
+
+function readLineFunc() {
+  readline = require('readline');
+  rl = readline.createInterface(process.stdin, process.stdout);
+}
 
 // // SODA
 // let straw = String.fromCharCode(32, '&#160', 32, '&#160', 32, 47, 32);
@@ -300,6 +305,58 @@ const foodLevels = [
   }
 ];
 
+function gameOver() {}
+
+function levelUpTerminal() {
+  console.log('In Level Up');
+}
+
+function setHomerTerminal(lvl) {
+  return lvl * 100;
+}
+
+function feedHomerTerminal(food, lvl) {
+  let bellySize = setHomerTerminal(lvl);
+  let levelFood = Object.keys(food[lvl - 1]);
+
+  // while (homerBelly > 0) {
+  rl.question(`Feed Homer:\n ${levelFood}? > `, answer => {
+    bellySize -= food[lvl - 1][answer];
+    process.stdout.write(`Belly size: ${bellySize}`);
+
+    // if (bellySize > 0) {
+    //   rl.setPrompt(
+    //     `Homer is almost full, choose something else:\n ${levelFood} > `
+    //   );
+    //   rl.prompt();
+    // }
+
+    rl.on('line', answer => {
+      if (bellySize > 0) {
+        rl.setPrompt(
+          `Homer is almost full, choose something else:\n ${levelFood} > `
+        );
+        rl.prompt();
+        bellySize -= foodLevels[lvl - 1][answer];
+        process.stdout.write(`New Belly Size: ${bellySize}`);
+      } else {
+        rl.close();
+      }
+
+      // if (bellySize <= 0) {
+      //   rl.close();
+      //   levelUp();
+      // }
+    });
+
+    // feedHomer(food, lvl + 1);
+  });
+}
+
+// ########################
+// ##BROWESER CODE BELOW ##
+// ########################
+
 function intro() {
   const string =
     'Welcome to Happy, Happy Homer.\n' +
@@ -325,48 +382,6 @@ function gameRules(player) {
 
   alert(gamePlayString);
 }
-
-function gameOver() {}
-
-function levelUpTerminal() {
-  console.log('In Level Up');
-}
-
-function setHomerTerminal(lvl) {
-  return lvl * 100;
-}
-
-function feedHomerTerminal(food, lvl) {
-  let bellySize = setHomerTerminal(lvl);
-  let levelFood = Object.keys(food[lvl - 1]);
-
-  // while (homerBelly > 0) {
-  rl.question(`Feed Homer:\n ${levelFood}? > `, answer => {
-    bellySize -= food[lvl - 1][answer];
-    process.stdout.write(`Belly size: ${bellySize}`);
-
-    rl.on('line', answer => {
-      rl.setPrompt(
-        `Homer is almost full, choose something else:\n ${levelFood} > `
-      );
-      rl.prompt();
-
-      bellySize -= foodLevels[lvl - 1][answer];
-      process.stdout.write(`New Belly Size: ${bellySize}`);
-
-      if (bellySize <= 0) {
-        rl.close();
-        levelUp();
-      }
-    });
-
-    // feedHomer(food, lvl + 1);
-  });
-}
-
-// ##########
-// BROWESER CODE BELOW
-// ##########
 
 function setHomer(lvl) {
   alert(
@@ -400,12 +415,13 @@ function feedHomer(food, lvl) {
 // feedHomer(foodLevels, 1);
 
 (function initGame() {
-  // uncomment this if you want to run in browser
-  // intro();
-  // let player = setPlayer();
-  // gameRules(player);
-  // feedHomer(foodLevels, 1);
-
-  // comment this out if you want to run in the browser
-  feedHomerTerminal(foodLevels, 1);
+  if (typeof window === 'undefined') {
+    readLineFunc();
+    feedHomerTerminal(foodLevels, 1);
+  } else {
+    intro();
+    let player = setPlayer();
+    gameRules(player);
+    feedHomer(foodLevels, 1);
+  }
 })();

@@ -508,15 +508,35 @@ const foodLevels = [
     santas_little_helper: 80
   }
 ];
-
-function introTerminal() {
+// **** TERMINAL FUNCTIONS **** //
+function introT() {
   const string =
     '\nWelcome to Happy, Happy Homer.\n' +
     "A fun game Homer from the Simpsons can't stop eating\n" +
     'Feed him everything you can to satisfy his craving.\n';
-  process.stdout.write(string);
+  console.log(string);
 }
 
+function gameRulesT(player) {
+  console.log(`${player}, let's go over the game play`);
+  let gamePlayString =
+    'The objective is to feed Homer a variety of items.\n' +
+    "If he doesn't explode, you advance to the next level.\n" +
+    'Beware though, Homer might randomly explode\n' +
+    "Try not to feed him too fast or you'll be coverd in everything he ate.";
+
+  console.log(gamePlayString);
+}
+
+function setHomerT(lvl) {
+  console.log(
+    `Level ${lvl}\nHomer has ${lvl *
+      100} points\nDrop that down to zero to advance to the next level.`
+  );
+  return lvl * 100;
+}
+
+// **** ^ TERMINAL FUNCTIONS **** //
 function gameOver() {}
 
 function levelUpTerminal(lvl) {
@@ -592,7 +612,7 @@ function feedHomerTerminal(food, lvl) {
 // ## BROWESER CODE BELOW ##
 // #########################
 
-function intro() {
+function introB() {
   const string =
     'Welcome to Happy, Happy Homer.\n' +
     "A fun game Homer from the Simpsons can't stop eating\n" +
@@ -600,7 +620,7 @@ function intro() {
   alert(string);
 }
 
-function gameRules(player) {
+function gameRulesB(player) {
   alert(`${player}, let's go over the game play`);
   let gamePlayString =
     'The objective is to feed Homer a variety of items.\n' +
@@ -611,7 +631,7 @@ function gameRules(player) {
   alert(gamePlayString);
 }
 
-function setHomer(lvl) {
+function setHomerB(lvl) {
   alert(
     `Level ${lvl}\nHomer has ${lvl *
       100} points\nDrop that down to zero to advance to the next level.`
@@ -620,7 +640,7 @@ function setHomer(lvl) {
 }
 
 function feedHomer(food, lvl) {
-  let homerBelly = setHomer(lvl);
+  let homerBelly = setHomerB(lvl);
   let levelFood = Object.keys(foodLevels[lvl - 1]);
 
   while (homerBelly > 0) {
@@ -639,10 +659,12 @@ function feedHomer(food, lvl) {
   return feedHomer(foodLevels, lvl + 1);
 }
 
+
+// ***** dual version functions ***** //
 function initGame() {
   if (typeof window === 'undefined') {
     consoleBrowser = 'T';
-    introTerminal();
+    introT();
     readLineFunc();
     let homer = setHomerTerminal();
     // feedHomerTerminal(foodLevels, 1);
@@ -651,7 +673,7 @@ function initGame() {
     consoleBrowser = 'B';
     // intro();
     let player = setPlayer();
-    gameRules(player);
+    gameRulesB(player);
     feedHomer(foodLevels, 1);
   }
 }

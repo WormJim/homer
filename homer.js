@@ -14,22 +14,7 @@ let head1 = String.fromCharCode(32, 32, 32, 32, 95, 95, 95);
 let head2 = String.fromCharCode(32, 32, 32, 47, 47, 95, 92, 92, 95);
 let head3 = String.fromCharCode(32, 46, 34, 92, 92, 32, 32, 32, 32, 34, 46);
 let head4 = String.fromCharCode(47, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 92);
-let head5 = String.fromCharCode(
-  124,
-  32,
-  32,
-  32,
-  32,
-  32,
-  32,
-  32,
-  32,
-  32,
-  32,
-  32,
-  92,
-  95
-);
+let head5 = String.fromCharCode(124,32,32,32,32,32,32,32,32,32,32,32,92,95);
 let head6 = String.fromCharCode(
   124,
   32,
@@ -115,55 +100,9 @@ let head10 = String.fromCharCode(
   32,
   92
 );
-let head11 = String.fromCharCode(
-  32,
-  32,
-  32,
-  124,
-  32,
-  32,
-  46,
-  45,
-  39,
-  32,
-  32,
-  32,
-  32,
-  32,
-  41
-);
-let head12 = String.fromCharCode(
-  32,
-  32,
-  32,
-  124,
-  32,
-  40,
-  32,
-  32,
-  95,
-  47,
-  46,
-  46,
-  45,
-  46,
-  39
-);
-let head13 = String.fromCharCode(
-  32,
-  32,
-  32,
-  124,
-  32,
-  32,
-  96,
-  46,
-  95,
-  95,
-  95,
-  46,
-  39
-);
+let head11 = String.fromCharCode(32,32,32,124,32,32,46,45,39,32,32,32,32,32,);
+let head12 = String.fromCharCode(32,32,32,124,32,40,32,32,95,47,46,46,45,46,39);
+let head13 = String.fromCharCode(32,32,32,124,32,32,96,46,95,95,95,46,39);
 let head14 = String.fromCharCode(32, 32, 95, 47, 32, 32, 32, 32, 40);
 let head15 = String.fromCharCode(32, 47, 32, 32, 32, 32, 32, 32, 92, 92);
 
@@ -185,7 +124,13 @@ let homersHead = [
   head15
 ];
 // console.log("head")
-
+function myConsole(myOutput){
+  if(terminalBrowser === "T"){
+    console.log(myOutput)
+  } else if (terminalBrowser === "B") {
+    
+  }
+}
 // This function moves homer a cross the screen.
 function moveHomer(n, cb) {
   //n is the pause setTimeout in milliseconds between each loop
@@ -201,7 +146,7 @@ function moveHomer(n, cb) {
           console.log(row);
         });
         if (i === homersHead.length - 1) {
-          console.log('Ready to start the our game!!');
+          console.log('Ready to start our game!!');
           setTimeout(() => cb(), n * 10);
         }
       }, i * n);
@@ -463,7 +408,7 @@ function moveHomer(n, cb) {
 // let beer = [beer1, beer2, beer3, beer4];
 // console.log('Beer');
 // beer.forEach(e => console.log(e));
-let consoleBrowser = ''; //flag to know where we are operating, 'B' for Browser, 'T' for terminal
+let terminalBrowser = ''; //flag to know where we are operating, 'B' for Browser, 'T' for terminal
 
 const foodLevels = [
   {
@@ -665,18 +610,18 @@ function feedHomer(food, lvl) {
 // ***** dual version functions ***** //
 function initGame() {
   if (typeof window === 'undefined') {
-    consoleBrowser = 'T';
+    terminalBrowser = 'T';
     introT();
     readLineFunc();
     let homer = setHomerTerminal();
     // feedHomerTerminal(foodLevels, 1);
     feedHomerTerminal(homer());
   } else {
-    consoleBrowser = 'B';
+    terminalBrowser = 'B';
     // intro();
     let player = setPlayer();
-    gameRulesB(player);
-    feedHomer(foodLevels, 1);
+    // gameRulesB(player);
+    // feedHomer(foodLevels, 1);
   }
 }
 

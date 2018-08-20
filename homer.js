@@ -307,55 +307,76 @@ const foodLevels = [
 
 function gameOver() {}
 
-function levelUpTerminal() {
+function levelUpTerminal(lvl) {
   console.log('In Level Up');
+  return lvl++;
 }
 
 function setHomerTerminal(lvl) {
   return lvl * 100;
 }
 
+// function checkProp(string) {
+//   console.log(foodLevels.hasOwnProperty(string));
+//   if (!foodLevels.hasOwnProperty(string)) return false;
+//   return string;
+// }
+
+function homerMustEat(answer, food, bellySize, levelFood) {
+  if (!levelFood.hasOwnProperty(answer)) {
+    rl.setPrompt(`\nImproper argument, please choose again:\n${levelFood} > `);
+    rl.prompt();
+  } else {
+    bellySize -= food[lvl - 1][answer];
+    if (bellySize < 25) {
+      rl.setPrompt(
+        `\nHomer is almost full, choose something else:\n ${levelFood} > `
+      );
+      rl.prompt();
+    } else {
+      rl.setPrompt(
+        `\nHomer is still hungry, see what else he can eat:\n${levelFood} > `
+      );
+      rl.prompt();
+    }
+  }
+}
+
 function feedHomerTerminal(food, lvl) {
   let bellySize = setHomerTerminal(lvl);
   let levelFood = Object.keys(food[lvl - 1]);
 
-  // while (homerBelly > 0) {
-  rl.question(`Feed Homer:\n ${levelFood}? > `, answer => {
-    bellySize -= food[lvl - 1][answer];
-    process.stdout.write(`Belly size: ${bellySize}`);
-
-    // if (bellySize > 0) {
-    //   rl.setPrompt(
-    //     `Homer is almost full, choose something else:\n ${levelFood} > `
-    //   );
-    //   rl.prompt();
-    // }
-
+  rl.question(`\nFeed Homer:\n ${levelFood}? > `, answer => {
+    homerMustEat(answer, food, bellySize, levelFood);
     rl.on('line', answer => {
-      if (bellySize > 0) {
-        rl.setPrompt(
-          `Homer is almost full, choose something else:\n ${levelFood} > `
-        );
-        rl.prompt();
-        bellySize -= foodLevels[lvl - 1][answer];
-        process.stdout.write(`New Belly Size: ${bellySize}`);
-      } else {
+      if (answer === 'exit') {
         rl.close();
       }
+      homerMustEat(answer, food, bellySize, levelFood);
+      // bellySize -= food[lvl - 1][answer];
 
       // if (bellySize <= 0) {
       //   rl.close();
-      //   levelUp();
+      // } else if (bellySize <= 25) {
+      //   rl.setPrompt(
+      //     `Homer is almost full, choose something else and hope he doesn't explode:\n ${levelFood} > `
+      //   );
+      //   rl.prompt();
+      // } else {
+      //   rl.prompt();
       // }
     });
 
-    // feedHomer(food, lvl + 1);
+    // rl.on('close', () => {
+    //   console.log('Closed');
+    //   feedHomerTerminal(food, levelUpTerminal(lvl));
+    // });
   });
 }
 
-// ########################
-// ##BROWESER CODE BELOW ##
-// ########################
+// #########################
+// ## BROWESER CODE BELOW ##
+// #########################
 
 function intro() {
   const string =
@@ -365,17 +386,15 @@ function intro() {
   alert(string);
 }
 
-function feedHomer(food) {}
-
 function gameRules(player) {
-  // alert(`${player}, let's go over the game play`);
+  alert(`${player}, let's go over the game play`);
   let gamePlayString =
     'The objective is to feed Homer a variety of items.\n' +
     "If he doesn't explode, you advance to the next level.\n" +
     'Beware though, Homer might randomly explode\n' +
     "Try not to feed him too fast or you'll be coverd in everything he ate.";
 
-  // alert(gamePlayString);
+  alert(gamePlayString);
 }
 
 function setHomer(lvl) {
@@ -383,8 +402,7 @@ function setHomer(lvl) {
     `Level ${lvl}\nHomer has ${lvl *
       100} points\nDrop that down to zero to advance to the next level.`
   );
-  let level = lvl * 100;
-  return level;
+  return lvl * 100;
 }
 
 function feedHomer(food, lvl) {
@@ -406,8 +424,6 @@ function feedHomer(food, lvl) {
 
   return feedHomer(foodLevels, lvl + 1);
 }
-
-// feedHomer(foodLevels, 1);
 
 (function initGame() {
   if (typeof window === 'undefined') {

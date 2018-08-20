@@ -396,8 +396,12 @@ function feedHomer(food, lvl) {
 // feedHomer(foodLevels, 1);
 
 (function initGame() {
-  intro();
-  let player = setPlayer();
-  gameRules(player);
-  feedHomer(foodLevels, 1);
+  // uncomment this if you want to run in browser
+  // intro();
+  // let player = setPlayer();
+  // gameRules(player);
+  // feedHomer(foodLevels, 1);
+
+  // comment this out if you want to run in the browser
+  feedHomerTerminal(foodLevels, 1);
 })();

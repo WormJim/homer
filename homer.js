@@ -344,29 +344,31 @@ function setHomer(lvl) {
   return lvl * 100;
 }
 
-function feedHomer(food) {
-  let level = 1;
-  let homerBelly = setHomer(level);
-  console.log('Homer Belly:', homerBelly);
-  let levelFood = Object.keys(foodLevels[level - 1]);
+function feedHomer(food, lvl) {
+  let bellySize = setHomer(lvl);
+  let levelFood = Object.keys(food[lvl - 1]);
 
   // while (homerBelly > 0) {
   rl.question(`Feed Homer:\n ${levelFood}? > `, answer => {
-    homerBelly -= foodLevels[level - 1][answer];
-    process.stdout.write(`Belly size: ${homerBelly}`);
+    bellySize -= food[lvl - 1][answer];
+    process.stdout.write(`Belly size: ${bellySize}`);
 
     rl.on('line', answer => {
       rl.setPrompt(
         `Homer is almost full, choose something else:\n ${levelFood} > `
       );
       rl.prompt();
-      homerBelly -= foodLevels[level - 1][answer];
 
-      if (homerBelly <= 0) {
+      bellySize -= foodLevels[lvl - 1][answer];
+      process.stdout.write(`New Belly Size: ${bellySize}`);
+
+      if (bellySize <= 0) {
         rl.close();
         levelUp();
       }
     });
+
+    // feedHomer(food, lvl + 1);
   });
   // }
 
@@ -395,5 +397,34 @@ function feedHomer(food) {
   // let player = setPlayer();
   // gameRules(player);
   // let homer = setHomer(1);
-  feedHomer(foodLevels);
+  feedHomer(foodLevels, 1);
 })();
+
+// function setHomer(lvl) {
+//   alert(
+//     `Level ${lvl}\nHomer has ${lvl *
+//       100} points\nDrop that down to zero to advance to the next level.`
+//   );
+//   let level = lvl * 100;
+//   return level;
+// }
+
+// function feedHomer(food, lvl) {
+//   let homerBelly = setHomer(lvl);
+//   let levelFood = Object.keys(food[lvl - 1]);
+
+//   while (homerBelly > 0) {
+//     let chosen = prompt(
+//       `Feed homer with the choice of food:\n ` + levelFood.join('\n')
+//     );
+
+//     if (homerBelly <= 0) {
+//       alert('You leveled up!');
+//     } else if (homerBelly > 0) {
+//       homerBelly -= food[lvl - 1][chosen];
+//       alert('Current remaining space is: ' + homerBelly);
+//     }
+//   }
+
+//   return feedHomer(foodLevels, lvl + 1);
+// }

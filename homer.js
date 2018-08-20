@@ -512,8 +512,9 @@ const foodLevels = [
 function introT() {
   const string =
     '\nWelcome to Happy, Happy Homer.\n' +
-    "A fun game Homer from the Simpsons can't stop eating\n" +
-    'Feed him everything you can to satisfy his craving.\n';
+    "A fun game with Homer from the Simpsons. Homer can't stop eating.\n" +
+    'Feed him everything you can to satisfy his craving.\n' +
+    "Just don't let Homer explode!";
   console.log(string);
 }
 
@@ -521,8 +522,9 @@ function gameRulesT(player) {
   console.log(`${player}, let's go over the game play`);
   let gamePlayString =
     'The objective is to feed Homer a variety of items.\n' +
+    'Each item fills that Simpsons belly more and more.\n' +
     "If he doesn't explode, you advance to the next level.\n" +
-    'Beware though, Homer might randomly explode\n' +
+    'Beware though, Homer might randomly explode.\n' +
     "Try not to feed him too fast or you'll be coverd in everything he ate.";
 
   console.log(gamePlayString);

@@ -299,15 +299,15 @@ const foodLevels = [
 
 function intro() {
   const string =
-    "Welcome to Happy, Happy Homer.\n" +
+    'Welcome to Happy, Happy Homer.\n' +
     "A fun game Homer from the Simpsons can't stop eating\n" +
-    "Feed him everything you can to satisfy his craving.";
+    'Feed him everything you can to satisfy his craving.';
   alert(string);
 }
 
 function setPlayer() {
   alert("Let's get started");
-  let player = prompt("What is your name?");
+  let player = prompt('What is your name?');
   alert(`Hello ${player}!`);
   return player;
 }
@@ -315,9 +315,9 @@ function setPlayer() {
 function gameRules(player) {
   alert(`${player}, let's go over the game play`);
   let gamePlayString =
-    "The objective is to feed Homer a variety of items.\n" +
+    'The objective is to feed Homer a variety of items.\n' +
     "If he doesn't explode, you advance to the next level.\n" +
-    "Beware though, Homer might randomly explode\n" +
+    'Beware though, Homer might randomly explode\n' +
     "Try not to feed him too fast or you'll be coverd in everything he ate.";
 
   alert(gamePlayString);
@@ -340,76 +340,25 @@ function feedHomer(food, lvl) {
 
   while (homerBelly > 0) {
     let chosen = prompt(
-      `Feed homer with the choice of food:\n ` + levelFood.join("\n")
+      `Feed homer with the choice of food:\n ` + levelFood.join('\n')
     );
 
     if (homerBelly <= 0) {
-      // alert("You leveled up!")
-      // alert(soda.forEach(el => return el);
+      alert('You leveled up!');
     } else if (homerBelly > 0) {
       homerBelly -= foodLevels[lvl - 1][chosen];
-      alert("Current remaining space is: " + homerBelly);
+      alert('Current remaining space is: ' + homerBelly);
     }
   }
 
   return feedHomer(foodLevels, lvl + 1);
 }
-feedHomer(foodLevels, 1);
 
-init(function initGame() {
+// feedHomer(foodLevels, 1);
+
+(function initGame() {
   intro();
   let player = setPlayer();
   gameRules(player);
-  let homer = setHomer(1);
-  feedHomer(foodLevels);
-})();
-function gameRules(player) {
-  alert(`${player}, let's go over the game play`);
-  let gamePlayString =
-    "The objective is to feed Homer a variety of items.\n" +
-    "If he doesn't explode, you advance to the next level.\n" +
-    "Beware though, Homer might randomly explode\n" +
-    "Try not to feed him too fast or you'll be coverd in everything he ate.";
-
-  alert(gamePlayString);
-}
-
-function gameOver() {}
-
-function setHomer(lvl) {
-  alert(
-    `Level ${lvl}\nHomer has ${lvl *
-      100} points\nDrop that down to zero to advance to the next level.`
-  );
-  let level = lvl * 100;
-  return level;
-}
-
-function feedHomer(food, lvl) {
-  let homerBelly = setHomer(lvl);
-  let levelFood = Object.keys(foodLevels[lvl - 1]);
-
-  while (homerBelly > 0) {
-    let chosen = prompt(
-      `Feed homer with the choice of food:\n ` + levelFood.join("\n")
-    );
-
-    if (homerBelly <= 0) {
-      alert("You leveled up!");
-    } else if (homerBelly > 0) {
-      homerBelly -= foodLevels[lvl - 1][chosen];
-      alert("Current remaining space is: " + homerBelly);
-    }
-  }
-
-  return feedHomer(foodLevels, lvl + 1);
-}
-feedHomer(foodLevels, 1);
-
-init(function initGame() {
-  intro();
-  let player = setPlayer();
-  gameRules(player);
-  let homer = setHomer(1);
-  feedHomer(foodLevels);
+  feedHomer(foodLevels, 1);
 })();

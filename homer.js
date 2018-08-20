@@ -317,7 +317,7 @@ function setHomer(lvl) {
 function feedHomer(food) {}
 
 function gameRules(player) {
-  alert(`${player}, let's go over the game play`);
+  // alert(`${player}, let's go over the game play`);
   let gamePlayString =
     'The objective is to feed Homer a variety of items.\n' +
     "If he doesn't explode, you advance to the next level.\n" +
@@ -345,28 +345,38 @@ function intro() {
 function setPlayer() {
   rl.question('\nWhat would you like us to call you? > ', answer => {
     player.name = answer;
-    // Can either have setPrompt or
-    rl.setPrompt(`Nice to have you here ${answer} (return to continue)`);
-    rl.prompt();
-    // return;
+    // rl.setPrompt(`Nice to have you here ${answer} (return to continue)`);
+    // rl.prompt();
+
     // rl.on('line', () => {
-    //   rl.setPrompt(`How Excited are you about this ${player.name}? > `);
+    //   rl.setPrompt(
+    //     `What would you like to feed Homer ${Object.keys(foodLevels[0])}`
+    //   );
     //   rl.prompt();
-    // rl.close();
     // });
-    // can have console.log()
-    // console.log(`Nice to have you here ${answer}`);
   });
+
   // let player = process.stdout.write('What is your name?  >  ');
   // process.stdout.write(`Hello ${player}!\n`);
   // return player;
 }
 
+function another() {
+  rl.question(
+    `What would you like to feed Homer?: ${Object.keys(foodLevels[0])}`,
+    answer => {
+      console.log(answer);
+    }
+  );
+}
+
 (function initGame() {
-  let homer = setHomer(1);
+  // let homer = setHomer(1);
   intro();
   setPlayer();
-  console.log('Out');
-  gameRules(player);
+  another();
+
+  // console.log('Out');
+  // gameRules(player);
   // feedHomer(food);
 })();

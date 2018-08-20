@@ -360,6 +360,10 @@ function feedHomerTerminal(food, lvl) {
   });
 }
 
+// ##########
+// BROWESER CODE BELOW
+// ##########
+
 function setHomer(lvl) {
   alert(
     `Level ${lvl}\nHomer has ${lvl *

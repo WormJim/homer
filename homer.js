@@ -286,7 +286,9 @@ function feedHomer(food, lvl) {
     );
 
     if (homerBelly <= 0) {
-      alert('You leveled up!');
+      alert('You leveled up!\nHere is a prize.\nCheck your console');
+      console.clear();
+      console.log(ascii[lvl - 1]);
     } else if (homerBelly > 0) {
       if (homerBelly <= (lvl * 100) / 2) {
         if (vomit(homerBelly, foodLevels[lvl - 1][chosen])) {

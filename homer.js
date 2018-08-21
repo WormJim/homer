@@ -1,3 +1,47 @@
+const foodLevels = [
+  {
+    donut: 35,
+    soda: 10,
+    fries: 15,
+    burger: 75,
+    cowboy_burger: 35,
+    pizza: 20,
+    beer: 15,
+    ice_cream: 15
+  },
+  {
+    guitar: 25,
+    cello: 30,
+    piano: 40,
+    computer: 25,
+    desk: 35,
+    drums: 40,
+    chair: 25,
+    tree: 40
+  },
+  {
+    car: 40,
+    boat: 60,
+    plane: 70,
+    truck: 60,
+    motorcycle: 30,
+    train: 70,
+    plutonium: 90,
+    bees: 60
+  },
+  {
+    marge: 80,
+    bart: 70,
+    lisa: 55,
+    maggie: 100,
+    krusty_the_clown: 80,
+    apu: 70,
+    ned_flanders: 90,
+    mr_burns: 60,
+    santas_little_helper: 80
+  }
+];
+
 let space = String.fromCharCode(32, 32);
 let row = '';
 let str = '';
@@ -200,50 +244,6 @@ function moveHomer(n, cb) {
   }
 }
 
-const foodLevels = [
-  {
-    donut: 75,
-    soda: 10,
-    fries: 15,
-    burger: 75,
-    cowboy_burger: 35,
-    pizza: 20,
-    beer: 15,
-    ice_cream: 15
-  },
-  {
-    guitar: 25,
-    cello: 30,
-    piano: 40,
-    computer: 25,
-    desk: 35,
-    drums: 40,
-    chair: 25,
-    tree: 40
-  },
-  {
-    car: 40,
-    boat: 60,
-    plane: 70,
-    truck: 60,
-    motorcycle: 30,
-    train: 70,
-    plutonium: 90,
-    bees: 60
-  },
-  {
-    marge: 80,
-    bart: 70,
-    lisa: 55,
-    maggie: 100,
-    krusty_the_clown: 80,
-    apu: 70,
-    ned_flanders: 90,
-    mr_burns: 60,
-    santas_little_helper: 80
-  }
-];
-
 function intro() {
   const string =
     'Welcome to Happy, Happy Homer.\n' +
@@ -283,12 +283,41 @@ function feedHomer(food, lvl) {
     if (homerBelly <= 0) {
       alert('You leveled up!');
     } else if (homerBelly > 0) {
+      if (homerBelly <= (lvl * 100) / 2) {
+        if (vomit(homerBelly, foodLevels[lvl - 1][chosen])) {
+          return gameOver(false);
+        }
+      }
       homerBelly -= foodLevels[lvl - 1][chosen];
       alert('Current remaining space is: ' + homerBelly);
     }
   }
 
   return feedHomer(foodLevels, lvl + 1);
+}
+
+function gameOver(bool) {
+  if (!bool) {
+    alert("You Lost! Homer couldn't handle all the food");
+    // console.clear();
+  }
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+function vomit(belly, input) {
+  // set Random Number
+  let randNum = getRandomInt(10, belly);
+  // get input value
+
+  if (input > randNum) {
+    return true;
+  }
+  return false;
 }
 
 function initGame() {
@@ -302,7 +331,7 @@ function initGame() {
   // intro();
 
   // gameRules(player);
-  // feedHomer(foodLevels, 1);
+  feedHomer(foodLevels, 1);
 }
 
 moveHomer(125, initGame);

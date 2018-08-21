@@ -273,7 +273,7 @@ function gameRules(player) {
 function setHomer(lvl) {
   let str1 = `Level ${lvl}\nHomer has ${lvl *
     100} points\nDrop that down to zero to advance to the next level.`;
-  alert(str1)
+  alert(str1);
   // if need be we use a confirm() and have a return of false value.
   // if the value it false we don't return level, but false
   return lvl * 100;
@@ -288,7 +288,7 @@ function feedHomer(food, lvl) {
       `Feed homer with the choice of food:\n` + levelFood.join('\n')
     );
     chosen = chosen.trim().toLowerCase();
-    
+
     homerBelly -= foodLevels[lvl - 1][chosen];
     if (chosen === 'cello') {
       alert(`You chose a special item: The ${chosen}`);
@@ -297,10 +297,10 @@ function feedHomer(food, lvl) {
     alert(
       `You feed Homer a ${chosen}. You can feed him ${homerBelly} points worth of food`
     );
-    if (levelFood.indexOf(chosen) === -1){
-      let str1 = `Thanks, but ${chosen} is not on the dinner table\nSo try again. Trying is the first step towards failure.`
-      alert(str1)} else 
-    if (homerBelly <= 0) {
+    if (levelFood.indexOf(chosen) === -1) {
+      let str1 = `Thanks, but ${chosen} is not on the dinner table\nSo try again. Trying is the first step towards failure.`;
+      alert(str1);
+    } else if (homerBelly <= 0) {
       console.clear();
       console.log(ascii[lvl - 1]);
       alert('You leveled up!\nHere is a prize.\nCheck your console');
@@ -308,12 +308,10 @@ function feedHomer(food, lvl) {
       if (homerBelly <= (lvl * 100) / 2) {
         if (vomit(homerBelly, foodLevels[lvl - 1][chosen])) {
           return gameOver(false);
-
         }
         homerBelly -= foodLevels[lvl - 1][chosen];
         alert('Current remaining space is: ' + homerBelly);
       }
-
     }
   }
   return feedHomer(foodLevels, lvl + 1);

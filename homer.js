@@ -285,18 +285,21 @@ function feedHomer(food, lvl) {
       `Feed homer with the choice of food:\n ` + levelFood.join('\n')
     );
 
+    homerBelly -= foodLevels[lvl - 1][chosen];
+    alert(
+      `You feed Homer ${chosen}. You can feed him ${homerBelly} points more`
+    );
+
     if (homerBelly <= 0) {
-      alert('You leveled up!\nHere is a prize.\nCheck your console');
       console.clear();
       console.log(ascii[lvl - 1]);
+      alert('You leveled up!\nHere is a prize.\nCheck your console');
     } else if (homerBelly > 0) {
       if (homerBelly <= (lvl * 100) / 2) {
         if (vomit(homerBelly, foodLevels[lvl - 1][chosen])) {
           return gameOver(false);
         }
       }
-      homerBelly -= foodLevels[lvl - 1][chosen];
-      alert('Current remaining space is: ' + homerBelly);
     }
   }
 
@@ -306,7 +309,8 @@ function feedHomer(food, lvl) {
 function gameOver(bool) {
   if (!bool) {
     alert("You Lost! Homer couldn't handle all the food");
-    // console.clear();
+    console.clear();
+    console.log(ascii[4]);
   }
 }
 

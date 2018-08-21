@@ -3,8 +3,8 @@ const foodLevels = [
     donut: 35,
     soda: 10,
     fries: 15,
-    burger: 75,
-    cowboy_burger: 35,
+    burger: 25,
+    cowboy_burger: 30,
     pizza: 20,
     beer: 15,
     ice_cream: 15
@@ -332,7 +332,6 @@ function getRandomInt(min, max) {
 function vomit(belly, input) {
   // set Random Number
   let randNum = getRandomInt(10, belly);
-  // get input value
 
   if (input > randNum) {
     return true;

@@ -246,25 +246,32 @@ const foodLevels = [
 
 function intro() {
   const string =
-    'Welcome to Happy, Happy Homer.\n' +
+    '\nWelcome to Happy, Happy Homer.\n' +
     "A fun game Homer from the Simpsons can't stop eating\n" +
-    'Feed him everything you can to satisfy his craving.';
-  alert(string);
+    'Feed him everything you can to satisfy his craving.\n';
+    return confirm(string)
+}
+
+function setPlayer() {
+  const str1 = "Let's get started\nWhat is your name?"
+  let player = prompt(str1)
+  return [confirm(`Hello ${player}!\nLet's continue`),player]
+  // return player;
 }
 
 function gameRules(player) {
-  alert(`${player}, let's go over the game play`);
   let gamePlayString =
+    `${player}, let's go over the game play\n`+
     'The objective is to feed Homer a variety of items.\n' +
     "If he doesn't explode, you advance to the next level.\n" +
     'Beware though, Homer might randomly explode\n' +
     "Try not to feed him too fast or you'll be coverd in everything he ate.";
 
-  alert(gamePlayString);
+  return confirm(gamePlayString);
 }
 
 function setHomer(lvl) {
-  alert(
+  let str1 = (
     `Level ${lvl}\nHomer has ${lvl *
       100} points\nDrop that down to zero to advance to the next level.`
   );
@@ -292,17 +299,17 @@ function feedHomer(food, lvl) {
 }
 
 function initGame() {
-  console.log('browser');
+
   if (intro()) {
-    if (setPlayer()) {
-      if (gameRules()) {
+    let arrSetPlayer = setPlayer()
+    let player = arrSetPlayer[1]
+    if (arrSetPlayer[0] === true) {
+      if (gameRules(player)) {
+        feedHomer(foodLevels, 1);
       }
     }
   }
-  // intro();
-
-  // gameRules(player);
-  // feedHomer(foodLevels, 1);
+  
 }
 
 moveHomer(125, initGame);

@@ -286,8 +286,12 @@ function feedHomer(food, lvl) {
     );
 
     homerBelly -= foodLevels[lvl - 1][chosen];
+    if (chosen === 'cello') {
+      alert(`You chose a special item: The ${chosen}`);
+      console.log(ascii[5]);
+    }
     alert(
-      `You feed Homer ${chosen}. You can feed him ${homerBelly} points more`
+      `You feed Homer a ${chosen}. You can feed him ${homerBelly} points worth of food`
     );
 
     if (homerBelly <= 0) {

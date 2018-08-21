@@ -1,3 +1,47 @@
+const foodLevels = [
+  {
+    donut: 35,
+    soda: 10,
+    fries: 15,
+    burger: 75,
+    cowboy_burger: 35,
+    pizza: 20,
+    beer: 15,
+    ice_cream: 15
+  },
+  {
+    guitar: 25,
+    cello: 30,
+    piano: 40,
+    computer: 25,
+    desk: 35,
+    drums: 40,
+    chair: 25,
+    tree: 40
+  },
+  {
+    car: 40,
+    boat: 60,
+    plane: 70,
+    truck: 60,
+    motorcycle: 30,
+    train: 70,
+    plutonium: 90,
+    bees: 60
+  },
+  {
+    marge: 80,
+    bart: 70,
+    lisa: 55,
+    maggie: 100,
+    krusty_the_clown: 80,
+    apu: 70,
+    ned_flanders: 90,
+    mr_burns: 60,
+    santas_little_helper: 80
+  }
+];
+
 let space = String.fromCharCode(32, 32);
 let row = '';
 let str = '';
@@ -200,74 +244,35 @@ function moveHomer(n, cb) {
   }
 }
 
-const foodLevels = [
-  {
-    donut: 75,
-    soda: 10,
-    fries: 15,
-    burger: 75,
-    cowboy_burger: 35,
-    pizza: 20,
-    beer: 15,
-    ice_cream: 15
-  },
-  {
-    guitar: 25,
-    cello: 30,
-    piano: 40,
-    computer: 25,
-    desk: 35,
-    drums: 40,
-    chair: 25,
-    tree: 40
-  },
-  {
-    car: 40,
-    boat: 60,
-    plane: 70,
-    truck: 60,
-    motorcycle: 30,
-    train: 70,
-    plutonium: 90,
-    bees: 60
-  },
-  {
-    marge: 80,
-    bart: 70,
-    lisa: 55,
-    maggie: 100,
-    krusty_the_clown: 80,
-    apu: 70,
-    ned_flanders: 90,
-    mr_burns: 60,
-    santas_little_helper: 80
-  }
-];
-
 function intro() {
   const string =
-    'Welcome to Happy, Happy Homer.\n' +
+    '\nWelcome to Happy, Happy Homer.\n' +
     "A fun game Homer from the Simpsons can't stop eating\n" +
-    'Feed him everything you can to satisfy his craving.';
-  alert(string);
+    'Feed him everything you can to satisfy his craving.\n';
+  return confirm(string);
+}
+
+function setPlayer() {
+  const str1 = "Let's get started\nWhat is your name?";
+  let player = prompt(str1);
+  return [confirm(`Hello ${player}!\nLet's continue`), player];
+  // return player;
 }
 
 function gameRules(player) {
-  alert(`${player}, let's go over the game play`);
   let gamePlayString =
+    `${player}, let's go over the game play\n` +
     'The objective is to feed Homer a variety of items.\n' +
     "If he doesn't explode, you advance to the next level.\n" +
     'Beware though, Homer might randomly explode\n' +
     "Try not to feed him too fast or you'll be coverd in everything he ate.";
 
-  alert(gamePlayString);
+  return confirm(gamePlayString);
 }
 
 function setHomer(lvl) {
-  alert(
-    `Level ${lvl}\nHomer has ${lvl *
-      100} points\nDrop that down to zero to advance to the next level.`
-  );
+  let str1 = `Level ${lvl}\nHomer has ${lvl *
+    100} points\nDrop that down to zero to advance to the next level.`;
   return lvl * 100;
 }
 
@@ -283,6 +288,11 @@ function feedHomer(food, lvl) {
     if (homerBelly <= 0) {
       alert('You leveled up!');
     } else if (homerBelly > 0) {
+      if (homerBelly <= (lvl * 100) / 2) {
+        if (vomit(homerBelly, foodLevels[lvl - 1][chosen])) {
+          return gameOver(false);
+        }
+      }
       homerBelly -= foodLevels[lvl - 1][chosen];
       alert('Current remaining space is: ' + homerBelly);
     }
@@ -291,18 +301,40 @@ function feedHomer(food, lvl) {
   return feedHomer(foodLevels, lvl + 1);
 }
 
+function gameOver(bool) {
+  if (!bool) {
+    alert("You Lost! Homer couldn't handle all the food");
+    // console.clear();
+  }
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+function vomit(belly, input) {
+  // set Random Number
+  let randNum = getRandomInt(10, belly);
+  // get input value
+
+  if (input > randNum) {
+    return true;
+  }
+  return false;
+}
+
 function initGame() {
-  console.log('browser');
   if (intro()) {
-    if (setPlayer()) {
-      if (gameRules()) {
+    let arrSetPlayer = setPlayer();
+    let player = arrSetPlayer[1];
+    if (arrSetPlayer[0] === true) {
+      if (gameRules(player)) {
+        feedHomer(foodLevels, 1);
       }
     }
   }
-  // intro();
-
-  // gameRules(player);
-  // feedHomer(foodLevels, 1);
 }
 
 moveHomer(125, initGame);

@@ -287,13 +287,15 @@ function feedHomer(food, lvl) {
     let chosen = prompt(
       `Feed homer with the choice of food:\n` + levelFood.join('\n')
     );
-
-
+    chosen = chosen.trim().toLowerCase();
+    
     homerBelly -= foodLevels[lvl - 1][chosen];
     alert(
       `You feed Homer ${chosen}. You can feed him ${homerBelly} points more`
     );
-
+    if (levelFood.indexOf(chosen) === -1){
+      let str1 = `Thanks, but ${chosen} is not on the dinner table\nSo try again. Trying is the first step towards failure.`
+      alert(str1)} else 
     if (homerBelly <= 0) {
       console.clear();
       console.log(ascii[lvl - 1]);

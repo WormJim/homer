@@ -1,3 +1,4 @@
+// File created 8-18-2018 by Grahn Cooledge Anna Brakowska and David Hartman
 const foodLevels = [
   {
     donut: 35,
